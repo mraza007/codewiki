@@ -254,7 +254,7 @@ CodeWiki is different: an LLM **reads and understands** the code, then writes st
 
 ## Inspiration
 
-This project was inspired by [Andrej Karpathy's tweet](https://x.com/kaboreel/status/1906430923801972793) about using LLMs to build personal knowledge bases — raw data compiled into wikis, queried and enhanced incrementally.
+This project was inspired by [Andrej Karpathy's tweet](https://x.com/karpathy/status/2039805659525644595) about using LLMs to build personal knowledge bases — raw data compiled into wikis, queried and enhanced incrementally.
 
 CodeWiki applies that same pattern to codebases.
 
