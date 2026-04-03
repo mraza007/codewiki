@@ -80,9 +80,13 @@ Fix any issues the verification agent finds.
 
 Run `cw index` then `cw meta update`.
 
-## Session End
+## After Every Completed Task
 
-1. If you fixed a bug, write `learnings/<slug>.md`:
+Do NOT wait until session end. After completing each task (bug fix, feature, refactor), immediately:
+
+1. **Update affected wiki articles.** If you changed `src/auth/middleware.py` and `modules/auth.md` describes that file, update the article now. You have full context right now — you won't remember the details later.
+
+2. **Write learnings.** If you fixed a bug, write `learnings/<slug>.md` immediately:
 ```
 ---
 title: <Short description>
@@ -93,7 +97,7 @@ tags: [relevant, tags]
 What happened, root cause, and fix.
 ```
 
-2. If you made a design decision, write `decisions/<slug>.md`:
+3. **Write decisions.** If you made a design decision, write `decisions/<slug>.md` immediately:
 ```
 ---
 title: <Decision>
@@ -103,8 +107,13 @@ tags: [relevant, tags]
 What was decided, why, and what alternatives were considered.
 ```
 
-3. If you changed code covered by existing wiki articles, update those articles.
-4. Run `cw index` then `cw meta update`.
+4. **Run `cw meta update`** to record the current commit.
+
+This is part of completing the task, not a separate step. A task isn't done until the wiki reflects what changed.
+
+## Session End
+
+Run `cw index` to rebuild the master index. That's it — everything else was already handled after each task.
 
 ## Article Quality Rules
 
