@@ -1,6 +1,7 @@
 mod config;
 mod frontmatter;
 mod meta;
+mod setup;
 
 use clap::{Parser, Subcommand};
 
@@ -28,12 +29,40 @@ enum Commands {
     Projects,
     /// Print wiki path for current repo
     Path,
+    /// Set up codewiki for an agent or tool
+    Setup {
+        #[command(subcommand)]
+        target: SetupTarget,
+    },
+    /// Remove codewiki from an agent or tool
+    Uninstall {
+        #[command(subcommand)]
+        target: UninstallTarget,
+    },
 }
 
 #[derive(Subcommand)]
 enum MetaAction {
     /// Update _meta.yaml with current commit hash
     Update,
+}
+
+#[derive(Subcommand)]
+enum SetupTarget {
+    /// Install codewiki skill for Claude Code
+    ClaudeCode,
+    /// Install codewiki instructions for Codex
+    Codex,
+    /// Add codewiki collection to QMD search
+    Qmd,
+}
+
+#[derive(Subcommand)]
+enum UninstallTarget {
+    /// Remove codewiki from Claude Code
+    ClaudeCode,
+    /// Remove codewiki from Codex
+    Codex,
 }
 
 fn main() -> anyhow::Result<()> {
@@ -47,6 +76,15 @@ fn main() -> anyhow::Result<()> {
         Commands::Index => cmd_index(),
         Commands::Projects => cmd_projects(),
         Commands::Path => cmd_path(),
+        Commands::Setup { target } => match target {
+            SetupTarget::ClaudeCode => setup::setup_claude_code(),
+            SetupTarget::Codex => setup::setup_codex(),
+            SetupTarget::Qmd => setup::setup_qmd(),
+        },
+        Commands::Uninstall { target } => match target {
+            UninstallTarget::ClaudeCode => setup::uninstall_claude_code(),
+            UninstallTarget::Codex => setup::uninstall_codex(),
+        },
     }
 }
 
