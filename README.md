@@ -271,3 +271,22 @@ Contributions welcome! Some areas that need work:
 ## License
 
 [MIT](LICENSE)
+
+
+
+
+```  AI coding agents forget your codebase between sessions. Every session starts with the agent re-reading files it already read yesterday, rebuilding its understanding from scratch.
+
+  I built CodeWiki to fix this. It compiles your codebase into a structured wiki that your AI agent maintains. Module overviews, architecture docs, how things connect. The agent writes it once, keeps it updated as code changes, and uses it as context in every future
+  session.
+
+  No more cold starts. The understanding carries over.
+
+  Idea came from a Karpathy tweet about using LLMs to compile raw data into structured wikis. Codebases are raw data too.
+
+  Links in comments.
+
+  First comment:
+
+  GitHub: github.com/mraza007/codewiki
+  Blog post: muhammadraza.me/2026/building-codewiki-compiling-codebases-into-living-wikis/

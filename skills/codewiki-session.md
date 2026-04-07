@@ -156,6 +156,9 @@ What this module does in 2-3 sentences.
 ## Key Components
 List ALL functions/classes with line numbers and purpose.
 
+## Architecture
+Box diagram showing how components in this module interact (include if 3+ components or non-trivial flow).
+
 ## Data Flow
 How data enters, transforms, and exits this module.
 
@@ -165,6 +168,89 @@ Links to related modules: [[other-module]]
 ## Known Issues
 Anything fragile, incomplete, or worth noting. Be specific about what and where.
 ```
+
+## Markdown Formatting Rules
+
+All wiki articles MUST follow proper markdown formatting:
+
+- **Headings:** Use `##` for top-level sections, `###` for subsections. Never skip levels (no `####` after `##`).
+- **Lists:** Use `-` for unordered lists. Use `1.` for ordered/sequential steps. Indent nested lists with 2 spaces.
+- **Code:** Use backticks for inline code (`function_name`, `FileName.py`). Use fenced code blocks with language tags for multi-line code:
+  ````
+  ```python
+  def example():
+      pass
+  ```
+  ````
+- **Tables:** Use markdown tables for structured comparisons (fields, endpoints, config values):
+  ```
+  | Name | Type | Description |
+  |------|------|-------------|
+  | id   | int  | Primary key |
+  ```
+- **Bold/Italic:** Use `**bold**` for key terms on first mention. Use `*italic*` for file paths in prose.
+- **Links:** Use Obsidian `[[backlinks]]` for internal wiki references. Use `[text](url)` for external links.
+- **Blank lines:** Always leave a blank line before and after headings, code blocks, and lists.
+- **Line length:** No hard wrapping. One sentence per line is acceptable but not required.
+
+## Architecture Diagrams
+
+Every wiki MUST include architecture diagrams to visualize how components connect. Diagrams live in `_architecture.md` and in module articles where they clarify complex flows.
+
+### Required Diagrams
+
+During full compile, generate these diagrams in `_architecture.md`:
+
+1. **System Overview** — High-level box diagram showing all modules and their relationships:
+   ```
+   ┌─────────────┐     ┌─────────────┐
+   │   API Layer  │────►│  Auth Module │
+   │  (routes.py) │     │ (middleware) │
+   └──────┬──────┘     └──────┬──────┘
+          │                    │
+          ▼                    ▼
+   ┌─────────────┐     ┌─────────────┐
+   │  Data Layer  │◄────│   Models    │
+   │  (services)  │     │  (orm/db)   │
+   └─────────────┘     └─────────────┘
+   ```
+
+2. **Request/Data Flow** — Show the path of a typical request or data transformation through the system, labeling each step.
+
+3. **Dependency Graph** — Which modules import/depend on which. Use arrows to show direction.
+
+### Module-Level Diagrams
+
+Each module article (`modules/<name>.md`) should include a diagram when the module has:
+- More than 3 interacting classes or components
+- A non-trivial data flow (pipeline, middleware chain, event system)
+- External integrations (API calls, database, file I/O)
+
+Use this format in the article under a `## Architecture` section:
+```
+## Architecture
+
+```text
+Request ──► Middleware ──► Handler ──► Service ──► DB
+                │                        │
+                ▼                        ▼
+           Auth Check              Cache Layer
+`` `
+```
+
+### Diagram Style
+
+- Use UTF-8 box-drawing characters (`┌ ┐ └ ┘ ─ │ ► ◄ ▼ ▲`) for boxes and arrows
+- Label every box with the component name AND its file/class in parentheses
+- Label arrows with the relationship (calls, imports, returns, emits)
+- Keep diagrams under 20 lines — split into multiple diagrams if needed
+- Wrap diagrams in ` ```text ` fenced blocks so they render correctly in Obsidian
+
+### When to Update Diagrams
+
+- During full compile: generate all diagrams
+- After a task that changes module boundaries, adds new modules, or alters data flow: update the affected diagrams
+- If a new integration is added (new API, database, queue): add it to the system overview
 
 ## General Guidelines
 
